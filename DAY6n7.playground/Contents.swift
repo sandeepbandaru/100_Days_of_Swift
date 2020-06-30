@@ -86,6 +86,8 @@ travel {
 }
 
 //--------------------------------------------------------------------------------------------------
+//DAY7
+//closures - 2
 
 //Using closures as parameters when they accept parameters
 /*
