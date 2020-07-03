@@ -1,4 +1,5 @@
 //DAY10
+//Classes
 import UIKit
 
 //Creating your own classes
@@ -122,14 +123,66 @@ struct Singer1 {
 
 
 //Deinitilizers
+//The fourth difference between classes and structs is that classes can have deinitializers – code that gets run when an instance of a class is destroyed.
+
+//To demonstrate this, here’s a Person class with a name property, a simple initializer, and a printGreeting() method that prints a message:
+class Person {
+    var name = "John Doe"
+
+    init() {
+        print("\(name) is alive!")
+    }
+
+    func printGreeting() {
+        print("Hello, I'm \(name)")
+    }
+     //And now for the deinitializer. This will be called when the Person instance is being destroyed:
+     deinit {
+         print("\(name) is no more!")
+     }
+}
+
+//We’re going to create a few instances of the Person class inside a loop, because each time the loop goes around a new person will be created then destroyed:
+for _ in 1...3 {
+    let person = Person()
+    person.printGreeting()
+}
 
 //------------------------------------------------------------------------------------------
 
-
 //Mutability
+/*
+ The final difference between classes and structs is the way they deal with constants. If you have a constant struct with a variable property, that property can’t be changed because the struct itself is constant.
+ */
+
+/*
+ However, if you have a constant class with a variable property, that property can be changed. Because of this, classes don’t need the mutating keyword with methods that change properties; that’s only needed with structs.
+
+ This difference means you can change any variable property on a class even when the class is created as a constant – this is perfectly valid code:
+ */
+class Singer2 {
+    var name = "Taylor Swift"
+}
+
+let taylor = Singer2()
+taylor.name = "Ed Sheeran"
+print(taylor.name)
+
+//If you want to stop that from happening you need to make the property constant:
+//class Singer2 {
+//    let name = "Taylor Swift"
+//}
 
 //------------------------------------------------------------------------------------------
 
 
 //Classes summary
-
+/*
+ -Classes and structs are similar, in that they can both let you create your own types with properties and methods.
+ -One class can inherit from another, and it gains all the properties and methods of the parent class. It’s common to talk about class hierarchies – one class based on another, which itself is based on another.
+ -You can mark a class with the final keyword, which stops other classes from inheriting from it.
+ -Method overriding lets a child class replace a method in its parent class with a new implementation.
+ -When two variables point at the same class instance, they both point at the same piece of memory – changing one changes the other.
+ -Classes can have a deinitializer, which is code that gets run when an instance of the class is destroyed.
+ -Classes don’t enforce constants as strongly as structs – if a property is declared as a variable, it can be changed regardless of how the class instance was created.
+ */
