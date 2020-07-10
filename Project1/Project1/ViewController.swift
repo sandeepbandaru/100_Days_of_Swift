@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UITableViewController {
     var pictures = [String]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,6 +24,7 @@ class ViewController: UITableViewController {
         
         for item in items {
             if item.hasPrefix("nssl"){
+                pictures = pictures.sorted()
                 pictures.append(item)
             }
         }
@@ -42,6 +44,11 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.selctedImage = pictures[indexPath.row]
+            //print(vc.selctedImage)
+            vc.totalPictures = pictures.count
+            //print(vc.totalPictures)
+            vc.selectedPictureNumber = indexPath.row + 1
+            //print(vc.selectedPictureNumber)
             navigationController?.pushViewController(vc, animated: true)
         }
         else {

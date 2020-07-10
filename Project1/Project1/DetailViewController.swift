@@ -12,11 +12,13 @@ class DetailViewController: UIViewController {
     
     @IBOutlet var imageView: UIImageView!
     var selctedImage: String?
+    var selectedPictureNumber = 0
+    var totalPictures = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // title = "View Picture" // static text
-        title = selctedImage  //Dynamic text
+        title = "Picture \(selectedPictureNumber) of \(totalPictures)"//Dynamic text
         navigationItem.largeTitleDisplayMode = .never
         
         // Do any additional setup after loading the view.
