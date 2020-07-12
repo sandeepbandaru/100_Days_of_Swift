@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
         countries += ["estonia","france","nigeria","monaco","italy","poland","russia","us","uk","spain","germany","ireland"]
         
         askQuestion()
@@ -55,7 +55,6 @@ class ViewController: UIViewController {
             title = "Correct"
             score += 1
         }
-            
         else {
             title = "Wrong"
             score -= 1
@@ -67,7 +66,6 @@ class ViewController: UIViewController {
             ac.addAction(UIAlertAction(title: "Hey! you have attempted 10 questions.", style: .default))
             count = 0
         }
-            
         else if count == 10 && sender.tag != correctAnswer {
             ac.addAction(UIAlertAction(title: "you attempted 10 questions and it's  \(countries[sender.tag]) flag.", style: .default))
             count = 0
