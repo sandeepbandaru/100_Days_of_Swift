@@ -18,7 +18,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // title = "View Picture" // static text
-        title = "Picture \(selectedPictureNumber) of \(totalPictures)"//Dynamic text
+       // title = "Picture \(selectedPictureNumber) of \(totalPictures)"//Dynamic text
         navigationItem.largeTitleDisplayMode = .never
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
