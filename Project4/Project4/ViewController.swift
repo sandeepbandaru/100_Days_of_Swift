@@ -9,11 +9,12 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController,WKNavigationDelegate {
+class ViewController: UIViewController, WKNavigationDelegate {
     
     var webView: WKWebView!
     var progressView: UIProgressView!
-    var websites = ["apple.com","github.com/sandeepbandaru"]
+    var websites = ["apple.com","www.hackingwithswift.com","www.google.com"]
+   
     
     override func loadView() {
         webView = WKWebView()
@@ -23,17 +24,20 @@ class ViewController: UIViewController,WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
+        let goback = UIBarButtonItem(title:"Back", style:.plain, target: webView, action: #selector(webView.goBack))
+        let goforward = UIBarButtonItem(title: "Forward", style: .plain, target: webView, action: #selector(webView.goForward))
         
         progressView = UIProgressView(progressViewStyle: .default)
         progressView.sizeToFit()
         let progressButton = UIBarButtonItem(customView: progressView)
         
-        toolbarItems = [progressButton,spacer,refresh]
+        toolbarItems = [progressButton,spacer,refresh,goback,goforward]
         navigationController?.isToolbarHidden = false
         
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
@@ -44,13 +48,13 @@ class ViewController: UIViewController,WKNavigationDelegate {
     }
     
     @objc func openTapped() {
-        let ac = UIAlertController(title: "open page...", message: nil, preferredStyle: .actionSheet)
+        let ac = UIAlertController(title: "Open page...", message: nil, preferredStyle: .actionSheet)
         
         for website in websites {
          ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
         }
         
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(ac, animated: true)
     }
